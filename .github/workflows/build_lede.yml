@@ -32,6 +32,7 @@ env:
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
+  DEVICE: cmcc_rax3000q
   TZ: Asia/Shanghai
 
 jobs:
