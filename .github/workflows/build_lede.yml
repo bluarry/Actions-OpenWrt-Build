@@ -219,7 +219,7 @@ jobs:
     #   id: tag
     #   if: env.UPLOAD_RELEASE == 'true' && !cancelled()
     #   run: |
-    #     echo "release_tag=RAX3000Q-23_05-$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
+    #     echo "release_tag=RAX3000Q-lede-$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
     #     touch release.txt
     #     echo "status=success" >> $GITHUB_OUTPUT
 
