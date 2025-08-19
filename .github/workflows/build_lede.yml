@@ -19,6 +19,8 @@ on:
         required: false
         default: 'false'
         type: boolean
+  schedule:
+    - cron: 0 3 * * *
 
 env:
   REPO_URL: https://github.com/bluarry/lede
