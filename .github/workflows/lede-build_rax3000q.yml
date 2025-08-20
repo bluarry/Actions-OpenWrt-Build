@@ -1,17 +1,14 @@
-#=================================================
-#不更新源码杜绝出错版
-#=================================================
-
-name: 编译K2:LEDE默认配置（代码不更新版）
+name: Build RAX3000Q lede branch
 
 on: 
-  release:
-    types: [published]
-  push:
-    branches: 
-      - master
-    paths:
-      - 'beta.config'
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: false
+        type: boolean
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
@@ -41,6 +38,7 @@ jobs:
         sudo -E apt-get -qq clean
         curl -fsSL https://raw.githubusercontent.com/LEDE-Actions/dotfiles/master/.bashrc >> ~/.bashrc
         sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
     - name: 克隆源代码
       env: 
         REPO_URL: https://github.com/coolsnowwolf/lede
@@ -55,8 +53,8 @@ jobs:
 
     - name: 加载自定义配置
       env:
-        CONFIG_FILE: 'beta.config'
-        DIY_SH: 'diy.sh'
+        CONFIG_FILE: 'rax3000q/lede/K2.config'
+        DIY_SH: 'rax3000q/lede/diy.sh'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -64,6 +62,7 @@ jobs:
         cd openwrt
         ../$DIY_SH
         make defconfig
+
 #    - name: SSH connection to Actions
 #      uses: LEDE-Actions/debugger-action@master
 
@@ -72,16 +71,19 @@ jobs:
         cd openwrt && make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
     - name: 多线程编译
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
+
     - name: 单线程编译
       if: failure()
       run: |
         cd openwrt
         make -j1 V=s
+
 #    - name: 上载bin目录
 #      uses: actions/upload-artifact@master
 #      if: always()
@@ -95,6 +97,7 @@ jobs:
         cd openwrt/bin/targets/*/*
         rm -rf packages
         echo "::set-env name=FIRMWARE::$(pwd)"
+
     - name: 上载固件
       uses: actions/upload-artifact@master
       if: always()
