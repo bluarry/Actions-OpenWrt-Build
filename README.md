@@ -60,4 +60,6 @@ make feeds/packages/lang/golang/compile -j1 V=s
 ### dns46报错编译失败
 1. vi /home/ubuntu/Actions-OpenWrt-Build/openwrt/package/kernel/nat46/Makefile
 2. 增加 -Wno-vla选项，忽略warning转为error
-
+```
+sed -i 's/\(EXTRA_CFLAGS=".*\)"/\1 -Wno-vla"/' package/kernel/nat46/Makefile
+```
