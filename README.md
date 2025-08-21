@@ -1,4 +1,4 @@
-
+# Actions-OpenWrt
 Build Immortalwrt for CMCC RAX3000Q/QY using GitHub Actions
 
 Kernel Version : 5.4-QSDK
@@ -12,6 +12,10 @@ Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 Get SSH: [GetSSH](https://hugo.utermux.dev/default/rax3000q-latest/)
 
 UBoot: [UBoot](https://github.com/hzyitc/openwrt-redmi-ax3000/issues/73#issuecomment-2259591683) Set computer ip to:192.168.1.8, use LAN1 port.
+## Actions
+- kkstone-build-openwrt_rax3000q.yaml use kkstone branch to build openwrt for rax3000q
+- [work in progross]lede-build_rax3000q.yaml  use lede branch to build openwrt for rax3000q
+
 
 ## Acknowledgments
 
@@ -29,6 +33,8 @@ UBoot: [UBoot](https://github.com/hzyitc/openwrt-redmi-ax3000/issues/73#issuecom
 
 [MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX 
 
+## Extra
+local build use ubuntu:22.04
 
 ```
 sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
