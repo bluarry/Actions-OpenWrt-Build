@@ -46,3 +46,18 @@ sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bis
           python3-pyelftools qemu-utils re2c rsync scons squashfs-tools subversion swig \
           texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libtiff-dev
 ```
+
+### golang版本不对
+1. golang 使用以下仓库的1.20分支
+https://github.com/sbwml/packages_lang_golang/tree/20.x
+
+2. 执行以下命令安装golang
+./scripts/feeds install -p lang -a golang
+
+3. 执行以下命令编译golang
+make feeds/packages/lang/golang/compile -j1 V=s    
+
+### dns46报错编译失败
+1. vi /home/ubuntu/Actions-OpenWrt-Build/openwrt/package/kernel/nat46/Makefile
+2. 增加 -Wno-vla选项，忽略warning转为error
+
