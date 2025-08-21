@@ -102,13 +102,16 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-   
+        
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
-
+      run: |
+        cd openwrt && ./scripts/feeds update -a
+       
     - name: Fix golang version
       run: |
         cd openwrt
+        rm -rf feeds/packages/geoview
+        git clone https://github.com/bluarry/openwrt_geoview -b master feeds/packages/geoview
         rm -rf feeds/packages/lang/golang
         git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 22.x feeds/packages/lang/golang
         

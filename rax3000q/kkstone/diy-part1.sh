@@ -12,6 +12,5 @@
 # Uncomment a feed source
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
-sed -i '$a src-git geoview https://github.com/bluarry/openwrt_geoview' feeds.conf.default
 sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
 
