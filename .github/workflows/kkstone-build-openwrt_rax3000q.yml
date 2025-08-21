@@ -191,6 +191,13 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     
+    - name: 编译前调整
+      id: compile
+      run: |
+        cd openwrt
+        sed -i 's/\(EXTRA_CFLAGS=".*\)"/\1 -Wno-vla"/' package/kernel/nat46/Makefile
+        
+
     - name: Compile the firmware
       id: compile
       run: |
