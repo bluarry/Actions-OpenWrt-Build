@@ -113,7 +113,7 @@ jobs:
         rm -rf feeds/packages/geoview
         git clone https://github.com/bluarry/openwrt_geoview -b master feeds/packages/geoview
         rm -rf feeds/packages/lang/golang
-        git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 21.x feeds/packages/lang/golang
+        git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 20.x feeds/packages/lang/golang
         ./scripts/feeds update -i
         
     - name: Install feeds
@@ -199,6 +199,11 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
+        make -j$(nproc)
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 21.x feeds/packages/lang/golang
+        ./scripts/feeds update -i
+        make package/feeds/packages/lang/golang/compile 
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
