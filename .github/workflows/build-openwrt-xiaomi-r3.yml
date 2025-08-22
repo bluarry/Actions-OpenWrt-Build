@@ -14,7 +14,7 @@ env:
   FILES_PATH: xiaomi_r3/files
   PATCHES_PATH: xiaomi_r3/patches
   UPLOAD_RELEASE: true
-  TZ: UTC
+  TZ: Asia/Shanghai
 
 jobs:
   build:
