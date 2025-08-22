@@ -113,7 +113,7 @@ jobs:
         rm -rf feeds/packages/geoview
         git clone https://github.com/bluarry/openwrt_geoview -b master feeds/packages/geoview
         rm -rf feeds/packages/lang/golang
-        git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 20.x feeds/packages/lang/golang
+        git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 21.x feeds/packages/lang/golang
         ./scripts/feeds update -i
         
     - name: Install feeds
