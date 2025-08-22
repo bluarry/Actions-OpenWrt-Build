@@ -21,6 +21,7 @@ on:
         type: boolean
   schedule:
     - cron: 0 1 * * 5
+    - cron: 0 1 * * 3
 
 env:
   REPO_URL: https://github.com/kkstone/immortalwrt-ipq50xx
