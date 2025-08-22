@@ -46,10 +46,14 @@ sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bis
           python3-pyelftools qemu-utils re2c rsync scons squashfs-tools subversion swig \
           texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libtiff-dev
 ```
+### 安装包说明
+0. 删除迅雷快鸟，ddns-go, zerotier
+1. 支持passwall2
+2. 支持wireguard
 
 ### golang版本不对
-1. golang 使用以下仓库的1.20分支
-https://github.com/sbwml/packages_lang_golang/tree/20.x
+1. golang 使用以下仓库的1.21分支
+https://github.com/sbwml/packages_lang_golang/tree/21.x
 
 2. 执行以下命令安装golang
 ./scripts/feeds install -p lang -a golang
