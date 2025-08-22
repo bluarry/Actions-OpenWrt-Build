@@ -179,13 +179,6 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
-    - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     
     - name: 编译前调整
       id: compile_pre
@@ -193,7 +186,13 @@ jobs:
         cd openwrt
         sed -i 's/\(EXTRA_CFLAGS=".*\)"/\1 -Wno-vla"/' package/kernel/nat46/Makefile
         
-
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      
     - name: Compile the firmware
       id: compile
       run: |
@@ -203,7 +202,7 @@ jobs:
         rm -rf feeds/packages/lang/golang
         git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 21.x feeds/packages/lang/golang
         ./scripts/feeds update -i
-        make package/feeds/packages/lang/golang/compile 
+        ./scripts/feeds install -p lang -a golang 
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
