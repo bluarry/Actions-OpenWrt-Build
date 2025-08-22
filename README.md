@@ -16,6 +16,11 @@ Build OpenWrt for some routers using GitHub Actions
 - kkstone-build-openwrt_rax3000q.yaml use kkstone branch to build openwrt for rax3000q
 - build-openwrt-xiaomi-r3.yml  use openwrt branch openwrt-21.02 to build openwrt for xiaomi router r3
 
+## todo 
+适配玩客云
+- https://github.com/xydche/onecloud-openwrt
+- https://github.com/H2295/openwrt-onecloud-shiyu1314
+
 
 ## Extra
 local build use ubuntu:22.04
