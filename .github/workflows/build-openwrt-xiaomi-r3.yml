@@ -1,6 +1,6 @@
 # Build OpenWrt using GitHub Actions
 
-name: Build OpenWrt
+name: Build OpenWrt for xiaomi router r3
 
 on:
   workflow_dispatch:
