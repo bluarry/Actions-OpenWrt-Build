@@ -1,37 +1,21 @@
 # Actions-OpenWrt
-Build Immortalwrt for CMCC RAX3000Q/QY using GitHub Actions
+Build OpenWrt for some routers using GitHub Actions
 
-Kernel Version : 5.4-QSDK
+## 支持的路由器
+- xiaomi router r3
+- cmcc rax3000q/rax3000qy
 
-- Support IPV6
-- Support Wi-Fi NSS
-- Support NAT NSS
+| 路由器 | openwrt版本 | 源码链接 |
+| --- | --- | --- |
+| cmcc rax3000q/rax3000qy | openwrt-21.02 | https://github.com/kkstone/immortalwrt-ipq50xx |
+| xiaomi router r3 | openwrt-21.02 | https://github.com/bluarry/openwrt.git |
 
-Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 
-Get SSH: [GetSSH](https://hugo.utermux.dev/default/rax3000q-latest/)
 
-UBoot: [UBoot](https://github.com/hzyitc/openwrt-redmi-ax3000/issues/73#issuecomment-2259591683) Set computer ip to:192.168.1.8, use LAN1 port.
 ## Actions
 - kkstone-build-openwrt_rax3000q.yaml use kkstone branch to build openwrt for rax3000q
-- [work in progross]lede-build_rax3000q.yaml  use lede branch to build openwrt for rax3000q
+- build-openwrt-xiaomi-r3.yml  use openwrt branch openwrt-21.02 to build openwrt for xiaomi router r3
 
-
-## Acknowledgments
-
-- [Microsoft](https://www.microsoft.com)
-- [Microsoft Azure](https://azure.microsoft.com)
-- [GitHub](https://github.com)
-- [GitHub Actions](https://github.com/features/actions)
-- [tmate](https://github.com/tmate-io/tmate)
-- [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate)
-- [csexton/debugger-action](https://github.com/csexton/debugger-action)
-- [Cisco](https://www.cisco.com/)
-- [ImmortalWrt](https://github.com/kkstone/immortalwrt-ipq50xx)
-
-## License
-
-[MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX 
 
 ## Extra
 local build use ubuntu:22.04
@@ -47,7 +31,6 @@ sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bis
           texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libtiff-dev
 ```
 ### 安装包说明
-0. 删除迅雷快鸟，ddns-go, zerotier
 1. 支持passwall2
 2. 支持wireguard
 
@@ -67,3 +50,24 @@ make feeds/packages/lang/golang/compile -j1 V=s
 ```
 sed -i 's/\(EXTRA_CFLAGS=".*\)"/\1 -Wno-vla"/' package/kernel/nat46/Makefile
 ```
+
+
+
+## Acknowledgments
+
+- [Microsoft](https://www.microsoft.com)
+- [Microsoft Azure](https://azure.microsoft.com)
+- [GitHub](https://github.com)
+- [GitHub Actions](https://github.com/features/actions)
+- [tmate](https://github.com/tmate-io/tmate)
+- [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate)
+- [csexton/debugger-action](https://github.com/csexton/debugger-action)
+- [Cisco](https://www.cisco.com/)
+- [ImmortalWrt](https://github.com/kkstone/immortalwrt-ipq50xx)
+- [OpenWrt](https://github.com/openwrt/openwrt)
+- [OpenWrt-21.02](https://github.com/bluarry/openwrt)
+- [kkstone/Actions-OpenWrt-RAX3000Q](https://github.com/kkstone/Actions-OpenWrt-RAX3000Q)
+
+## License
+
+[MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX 
