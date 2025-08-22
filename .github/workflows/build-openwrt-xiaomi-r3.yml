@@ -13,7 +13,7 @@ on:
         type: boolean
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt.git
+  REPO_URL: https://github.com/bluarry/openwrt.git
   REPO_BRANCH: openwrt-21.02
   REPO_DEPTH: 1
   FEEDS_CONF: feeds.conf.default
@@ -91,21 +91,21 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-    - name: Load custom files
-      run: |
-        [ -d $FILES_PATH ] && mv $FILES_PATH openwrt/files
-        cd openwrt && git status -s
+    # - name: Load custom files
+    #   run: |
+    #     [ -d $FILES_PATH ] && mv $FILES_PATH openwrt/files
+    #     cd openwrt && git status -s
 
     - name: Load custom config
       run: |
         [ -f $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config && echo 'Custom config loaded!' || echo 'No custom config!'
 
-    - name: Apply patches
-      run: |
-        [ -d $PATCHES_PATH ] && mv $PATCHES_PATH openwrt/patches
-        cd openwrt
-        [ -d $PATCHES_PATH ] && for FILE in $(ls $PATCHES_PATH | grep .patch); do git apply --check $PATCHES_PATH/$FILE; git apply $PATCHES_PATH/$FILE; done
-        git status -s
+    # - name: Apply patches
+    #   run: |
+    #     [ -d $PATCHES_PATH ] && mv $PATCHES_PATH openwrt/patches
+    #     cd openwrt
+    #     [ -d patches ] && for FILE in $(ls patches | grep .patch); do git apply --check patches/$FILE; git apply patches/$FILE; done
+    #     git status -s
 
     - name: Download package
       id: package

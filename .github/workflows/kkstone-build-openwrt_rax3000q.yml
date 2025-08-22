@@ -20,7 +20,7 @@ on:
         default: false
         type: boolean
   schedule:
-    - cron: 10 16 * * 5
+    - cron: 0 1 * * 5
 
 env:
   REPO_URL: https://github.com/kkstone/immortalwrt-ipq50xx
