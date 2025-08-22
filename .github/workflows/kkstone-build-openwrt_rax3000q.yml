@@ -110,8 +110,8 @@ jobs:
     - name: Fix golang version
       run: |
         cd openwrt
-        rm -rf feeds/packages/geoview
-        git clone https://github.com/bluarry/openwrt_geoview -b master feeds/packages/geoview
+        rm -rf packages/geoview
+        git clone https://github.com/bluarry/openwrt_geoview -b master packages/geoview
         rm -rf feeds/packages/lang/golang
         git clone https://github.com/bluarry/packages_openwrt_lang_golang.git -b 20.x feeds/packages/lang/golang
         
@@ -176,13 +176,13 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
     
-    - name: 依赖包补充
-      run: |
-        cd openwrt
-        rm -rf packages/geoview
-        git clone https://github.com/bluarry/openwrt_geoview -b master packages/geoview
-        ./scripts/feeds install -p packages -a geoview
-        make defconfig
+    # - name: 依赖包补充
+    #   run: |
+    #     cd openwrt
+    #     rm -rf packages/geoview
+    #     git clone https://github.com/bluarry/openwrt_geoview -b master packages/geoview
+    #     ./scripts/feeds install -p packages -a geoview
+    #     make defconfig
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
