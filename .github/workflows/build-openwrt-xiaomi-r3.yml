@@ -3,7 +3,14 @@
 name: Build OpenWrt for xiaomi router r3
 
 on:
+  repository_dispatch:
   workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: false
+        type: boolean
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
@@ -23,8 +30,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-      with:
-        fetch-depth: 1
 
     - name: Initialization environment
       env:
@@ -72,25 +77,12 @@ jobs:
         git clone --depth $REPO_DEPTH --branch $REPO_BRANCH $REPO_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Cache OpenWrt
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-openwrt
+    - name: Enable build ccache
+      uses: klever1988/cachewrtbuild@main
       with:
-        path: |
-          openwrt/staging_dir
-          openwrt/build_dir
-          openwrt/dl
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ env.REPO_BRANCH }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-    
-    - name: Check cache
-      run: |
-        [ -d openwrt/staging_dir ] && echo "Found staging_dir cache" || echo "No staging_dir cache"
-        [ -d openwrt/build_dir ] && echo "Found build_dir cache" || echo "No build_dir cache"
-        [ -d openwrt/dl ] && echo "Found dl cache" ||  echo "No dl cache"
-        ls -al openwrt
+        ccache: 'true'
+        mixkey: 'immortalwrt21-cortexa7-vfpv4'
+        prefix: ${{ github.workspace }}/openwrt
 
     - name: Setup feeds
       run: |
